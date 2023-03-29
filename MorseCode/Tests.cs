@@ -9,11 +9,8 @@ namespace MorseCode
         [Fact]
         public void TestWhenInputIsEmpty()
         {
-            // Arrange
-            var morse = new MorseDecoder();
-            
             // Act
-            var actual = morse.Decode(string.Empty).ToList();
+            var actual = new MorseDecoder().Decode(string.Empty).ToList();
 
             // Assert
             actual.Should().HaveCount(1);
@@ -21,15 +18,12 @@ namespace MorseCode
         }
 
         [Theory]
-        [InlineAutoData("...---..-....-", "SOFIA")]
-        [InlineAutoData("...---..-....-", "EUGENIA")]
+        [InlineAutoData("...---..-....-", "sofia")]
+        [InlineAutoData("...---..-....-", "eugenia")]
         public void TestWhenInputIsNotEmpty(string input, string expected)
         {
-            // Arrange
-            var morse = new MorseDecoder();
-
             // Act
-            var actual = morse.Decode(input).ToList();
+            var actual = new MorseDecoder().Decode(input).ToList();
 
             // Assert
             actual.Should().HaveCountGreaterOrEqualTo(1);
