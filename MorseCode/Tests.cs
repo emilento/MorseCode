@@ -13,8 +13,7 @@ namespace MorseCode
             var actual = new MorseDecoder().Decode(string.Empty).ToList();
 
             // Assert
-            actual.Should().HaveCount(1);
-            actual[0].Should().BeEmpty();
+            actual.Should().HaveCount(0);
         }
 
         [Theory]
@@ -26,7 +25,7 @@ namespace MorseCode
             var actual = new MorseDecoder().Decode(input).ToList();
 
             // Assert
-            actual.Should().HaveCountGreaterOrEqualTo(1);
+            actual.Should().HaveCount(5104);
             actual.Should().Contain(expected);
         }
     }

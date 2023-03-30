@@ -8,11 +8,11 @@ if (string.IsNullOrWhiteSpace(input))
 }
 
 var decoder = new MorseDecoder();
-var decoded = decoder.Decode(input).Where(d => !string.IsNullOrWhiteSpace(d)).ToArray();
+var decoded = decoder.Decode(input);
 
-Console.WriteLine($"Found {decoded.Length} permutations.");
+Console.WriteLine($"Found {decoded.Count} permutations.");
 
-if (decoded.Length > 0)
+if (decoded.Count > 0)
 {
     Console.WriteLine("With the following words from dictionary:");
     var words = await File.ReadAllLinesAsync("words_alpha.txt");

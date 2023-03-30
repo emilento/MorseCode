@@ -32,7 +32,16 @@
             { 'Z', "--.." }
         };
 
-        public IEnumerable<string> Decode(string input)
+        public HashSet<string> Decode(string input)
+        {
+            return string.IsNullOrWhiteSpace(input)
+                ? Enumerable.Empty<string>().ToHashSet() 
+                : DecodeInternal(input)
+                    .Where(t => !string.IsNullOrWhiteSpace(t))
+                    .ToHashSet();
+        }
+
+        private static IEnumerable<string> DecodeInternal(string input)
         {
             var results = Map
                 .Where(pair => input.StartsWith(pair.Value))
@@ -48,12 +57,10 @@
                 return new[] { string.Empty };
             }
 
-            var query =
+            return 
                 from r in results
-                from decoded in Decode(r.Remaining)
+                from decoded in DecodeInternal(r.Remaining)
                 select (r.Letter + decoded).ToLowerInvariant();
-
-            return query.ToArray();
         }
     }
 }
