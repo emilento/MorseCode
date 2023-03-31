@@ -2,31 +2,30 @@
 using FluentAssertions;
 using Xunit;
 
-namespace MorseCode
+namespace MorseCode;
+
+public class Tests
 {
-    public class Tests
+    [Fact]
+    public void TestWhenInputIsEmpty()
     {
-        [Fact]
-        public void TestWhenInputIsEmpty()
-        {
-            // Act
-            var actual = new MorseDecoder().Decode(string.Empty).ToList();
+        // Act
+        var actual = new MorseDecoder().Decode(string.Empty).ToList();
 
-            // Assert
-            actual.Should().HaveCount(0);
-        }
+        // Assert
+        actual.Should().HaveCount(0);
+    }
 
-        [Theory]
-        [InlineAutoData("...---..-....-", "sofia")]
-        [InlineAutoData("...---..-....-", "eugenia")]
-        public void TestWhenInputIsNotEmpty(string input, string expected)
-        {
-            // Act
-            var actual = new MorseDecoder().Decode(input).ToList();
+    [Theory]
+    [InlineAutoData("...---..-....-", "sofia")]
+    [InlineAutoData("...---..-....-", "eugenia")]
+    public void TestWhenInputIsNotEmpty(string input, string expected)
+    {
+        // Act
+        var actual = new MorseDecoder().Decode(input).ToList();
 
-            // Assert
-            actual.Should().HaveCount(5104);
-            actual.Should().Contain(expected);
-        }
+        // Assert
+        actual.Should().HaveCount(5104);
+        actual.Should().Contain(expected);
     }
 }
